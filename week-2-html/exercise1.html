@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fitness Center Management Dashboard">
+    <title>Fitness Center Dashboard</title>
+</head>
+<body>
+    <header>
+        <img src="https://i.pinimg.com/736x/42/9d/63/429d631659a11a9eb666b103d811470a.jpg" alt="Fitness Center Logo" width="100">
+        <h1>
+            Fitness Center Dashboard
+        </h1>
+        <p>Open today: <time datetime="06:00-22:00">6:00 AM - 10:00 PM</time></p>
+        <nav>
+            <ul>
+                <li><a href="#class-schedule">Class Schedule</a></li>
+                <li><a href="#member-plans">Member Plans</a></li>
+                <li><a href="exercise1.html">Dashboard - Current Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+      <!-- Add Class Section -->
+      <section>
+          <h2>Add New Class</h2>
+          <form id="class-form">
+              <div>
+                  <label for="class-name">Class Name:</label>
+                  <input type="text" id="class-name" name="name" required>
+              </div>
+              <div>
+                  <label for="class-description">Description:</label>
+                  <textarea id="class-description" name="description" rows="3" cols="40" placeholder="Enter class description here..."></textarea>
+              </div>
+              <div>
+                  <label for="class-time">Time:</label>
+                  <input type="time" id="class-time" name="time" required>
+              </div>
+              <div>
+                  <label for="class-trainer">Trainer:</label>
+                  <input type="text" id="class-trainer" name="trainer" required>
+              </div>
+              <button type="submit">Add Class</button>
+          </form>
+      </section>
+
+      <!-- Current Classes Section -->
+      <section>
+          <h2 id="class-schedule">Current Classes</h2>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Time</th>
+                      <th>Trainer</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Yoga Basics</td>
+                      <td>7:00 AM</td>
+                      <td>Jane Doe</td>
+                      <td>
+                          <button>Edit</button>
+                          <button>Delete</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>HIIT Workout</td>
+                      <td>6:00 PM</td>
+                      <td>John Smith</td>
+                      <td>
+                          <button>Edit</button>
+                          <button>Delete</button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </section>
+
+      <!-- Member Plans Section -->
+      <section>
+          <h2 id="member-plans">Member Plans</h2>
+          <form id="plan-form">
+              <div>
+                  <label for="plan-name">Plan Name:</label>
+                  <input type="text" id="plan-name" name="plan-name" required>
+              </div>
+              <div>
+                  <label for="plan-duration">Duration (months):</label>
+                  <input type="number" id="plan-duration" name="plan-duration" min="1" required>
+              </div>
+              <div>
+                  <label for="plan-price">Price (€):</label>
+                  <input type="number" id="plan-price" name="plan-price" min="0" step="0.01" required>
+              </div>
+              <button type="submit">Add Plan</button>
+          </form>
+          <br>
+
+          <table>
+              <thead>
+                  <tr>
+                      <th>Plan Name</th>
+                      <th>Duration (Months)</th>
+                      <th>Price (€)</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Basic Plan</td>
+                      <td>1</td>
+                      <td>€30</td>
+                      <td>
+                          <button>Edit</button>
+                          <button>Delete</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Annual Plan</td>
+                      <td>12</td>
+                      <td>€300</td>
+                      <td>
+                          <button>Edit</button>
+                          <button>Delete</button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </section>
+
+      <!-- Management Tasks Section -->
+      <section>
+          <h3>Management Tasks</h3>
+          <details>
+              <summary>Weekly Tasks</summary>
+              <ul>
+                  <li>Review class schedule</li>
+                  <li>Check trainer availability</li>
+              </ul>
+          </details>
+          <details>
+              <summary>Monthly Tasks</summary>
+              <ul>
+                  <li>Update trainer availability</li>
+                  <li>Review feedback from members</li>
+              </ul>
+          </details>
+          <details>
+              <summary>Quarterly Tasks</summary>
+              <ul>
+                  <li>Introduce new fitness programs</li>
+                  <li>Analyze class attendance trends</li>
+              </ul>
+          </details>
+          <details>
+              <summary>Seasonal Tasks</summary>
+              <ul>
+                  <li>Promote health campaigns</li>
+                  <li>Organize special fitness events</li>
+              </ul>
+          </details>
+      </section>
+    </main>
+
+    <footer>
+        <p>Fitness Center Management System - Admin Panel</p>
+        <p>&copy; 2025 - Created for studying purposes only</p>
+    </footer>
+
+</body>
+</html>
