@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Restaurant Admin View">
+        <title>Restaurant Admin View</title>
+    </head>
+    <body>
+        <header>
+            <h1>Restaurant Admin View</h1>
+
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Wiener-Schnitzel02.jpg"
+                alt="Schnitzel"
+                width="200px">
+            <p>
+                Open today: <time datetime="11:00-22:00">11:00 AM - 10:00 PM</time>
+            </p>
+
+            <details>
+                <summary>We are a nice restaurant</summary>
+                <ul>
+                    <li>With good food</li>
+                    <li>With good drinks</li>
+                    <li>With good service</li>
+                </ul>
+            </details>
+
+            <nav>
+                <a href="admin.html">Go to main page</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h2>Add menu item</h2>
+                <form action="">
+                    <div>
+                        <label for="item-name">Name:</label>
+                        <input type="text" name="name" id="item-name" placeholder="Name" required>
+                    </div>
+                    <div>
+                        <label for="item-desc">Description</label>
+                        <textarea id="item-desc" rows="3" cols="40"></textarea>
+                    </div>
+                    <div>
+                        <label for="item-category">Category</label>
+                        <select id="item-category" multiple="true">
+                            <option>Appetizer</option>
+                            <option>Main Course</option>
+                            <option>Dessert</option>
+                            <option>Drink</option>
+                        </select>
+                    </div>
+                    <button>Create</button>
+                </form>
+            </section>
+
+            <!-- List all food items -->
+            <section>
+                <article>
+                    <h2>Appetizers</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Is Vegetarian</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sausage</td>
+                                <td>€12.99</td>
+                                <td>No</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <h2>Main dishes</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Is Vegetarian</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Schnitzel</td>
+                                <td>€12.99</td>
+                                <td>No</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Falafel</td>
+                                <td>€9.99</td>
+                                <td>Yes</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <h2>Desserts</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Is Vegetarian</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apple Pie</td>
+                                <td>€5.99</td>
+                                <td>Yes</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article>
+                    <h2>Drinks</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Is Vegetarian</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juice</td>
+                                <td>€3.99</td>
+                                <td>No</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            <p style="text-align: center;">&copy; 2025 Restaurant Admin Menu (studying purposes only)</p>
+        </footer>
+    </body>
+</html>
