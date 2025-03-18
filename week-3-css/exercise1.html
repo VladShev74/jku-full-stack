@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fitness Center Management Dashboard">
+    <title>Fitness Center Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body">
+    <header class="header">
+        <img src="https://i.pinimg.com/736x/42/9d/63/429d631659a11a9eb666b103d811470a.jpg" alt="Fitness Center Logo" width="100" class="header-logo">
+        <h1>Fitness Center Dashboard</h1>
+        <p>Open today: <time datetime="06:00-22:00">6:00 AM - 10:00 PM</time></p>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#class-schedule">Class Schedule</a></li>
+                <li><a href="#member-plans">Member Plans</a></li>
+                <li><a href="exercise1.html">Dashboard - Current Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="section">
+            <h2>Add New Class</h2>
+            <form id="class-form">
+                <div class="form-group">
+                    <label for="class-name" class="label">Class Name:</label>
+                    <input type="text" id="class-name" name="name" required class="input">
+                </div>
+                <div class="form-group">
+                    <label for="class-description" class="label">Description:</label>
+                    <textarea id="class-description" name="description" rows="3" cols="40" placeholder="Enter class description here..." class="textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="class-time" class="label">Time:</label>
+                    <input type="time" id="class-time" name="time" required class="input">
+                </div>
+                <div class="form-group">
+                    <label for="class-trainer" class="label">Trainer:</label>
+                    <input type="text" id="class-trainer" name="trainer" required class="input">
+                </div>
+                <button type="submit" class="button">Add Class</button>
+            </form>
+        </section>
+
+        <section class="section">
+            <h2 id="class-schedule">Current Classes</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="th">Name</th>
+                        <th class="th">Time</th>
+                        <th class="th">Trainer</th>
+                        <th class="th">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td">Yoga Basics</td>
+                        <td class="td">7:00 AM</td>
+                        <td class="td">Jane Doe</td>
+                        <td class="td">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td">HIIT Workout</td>
+                        <td class="td">6:00 PM</td>
+                        <td class="td">John Smith</td>
+                        <td class="td">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2 id="member-plans">Member Plans</h2>
+            <form id="plan-form">
+                <div class="form-group">
+                    <label for="plan-name" class="label">Plan Name:</label>
+                    <input type="text" id="plan-name" name="plan-name" required class="input">
+                </div>
+                <div class="form-group">
+                    <label for="plan-duration" class="label">Duration (months):</label>
+                    <input type="number" id="plan-duration" name="plan-duration" min="1" required class="input">
+                </div>
+                <div class="form-group">
+                    <label for="plan-price" class="label">Price (€):</label>
+                    <input type="number" id="plan-price" name="plan-price" min="0" step="0.01" required class="input">
+                </div>
+                <button type="submit" class="button">Add Plan</button>
+            </form>
+            <br>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="th">Plan Name</th>
+                        <th class="th">Duration (Months)</th>
+                        <th class="th">Price (€)</th>
+                        <th class="th">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td">Basic Plan</td>
+                        <td class="td">1</td>
+                        <td class="td">€30</td>
+                        <td class="td">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td">Annual Plan</td>
+                        <td class="td">12</td>
+                        <td class="td">€300</td>
+                        <td class="td">
+                            <button class="edit-button">Edit</button>
+                            <button class="delete-button">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h3>Management Tasks</h3>
+            <details class="details">
+                <summary class="summary">Weekly Tasks</summary>
+                <ul>
+                    <li>Review class schedule</li>
+                    <li>Check trainer availability</li>
+                </ul>
+            </details>
+            <details class="details">
+                <summary class="summary">Monthly Tasks</summary>
+                <ul>
+                    <li>Update trainer availability</li>
+                    <li>Review feedback from members</li>
+                </ul>
+            </details>
+            <details class="details">
+                <summary class="summary">Quarterly Tasks</summary>
+                <ul>
+                    <li>Introduce new fitness programs</li>
+                    <li>Analyze class attendance trends</li>
+                </ul>
+            </details>
+            <details class="details">
+                <summary class="summary">Seasonal Tasks</summary>
+                <ul>
+                    <li>Promote health campaigns</li>
+                    <li>Organize special fitness events</li>
+                </ul>
+            </details>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Fitness Center Management System - Admin Panel</p>
+        <p>&copy; 2025 - Created for studying purposes only</p>
+    </footer>
+</body>
+</html>

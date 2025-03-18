@@ -1,0 +1,152 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Header */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.header-logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.navbar ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Main Sections */
+.main {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+  display: block;
+}
+
+.input, .textarea {
+  width: 90%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button {
+  width: 20%;
+  background-color: #e7dcf0;
+  color: black;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-button {
+  width: 100%;
+  background-color: #4392F1;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.delete-button {
+  width: 100%;
+  background-color: #DC493A;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #FC7A57;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table, .th, .td {
+  border: 1px solid #ddd;
+}
+
+.th, .td {
+  padding: 10px;
+  text-align: left;
+}
+
+.th {
+  background-color: #333;
+  color: white;
+}
+
+/* Management Tasks */
+.details {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
