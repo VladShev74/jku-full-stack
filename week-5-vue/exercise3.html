@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fitness Center Management Dashboard">
+    <title>Fitness Center Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div id="app">
+        <header class="bg-gray-800 text-white p-6 text-center">
+            <img src="https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-962c-61f7-8f5e-0098ec908f48/raw?se=2025-04-27T18%3A34%3A05Z&sp=r&sv=2024-08-04&sr=b&scid=ca5750fa-d2f3-5497-87cd-5424617260a5&skoid=dfdaf859-26f6-4fed-affc-1befb5ac1ac2&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-27T08%3A35%3A18Z&ske=2025-04-28T08%3A35%3A18Z&sks=b&skv=2024-08-04&sig=lkYbNAIZZdcWjT3/u7qlNJbOzJ3at8AtRCy4l4bV75U%3D" alt="Fitness Center Logo" class="mx-auto w-24 mb-2">
+            <h1 class="text-2xl font-bold">Fitness Center Dashboard</h1>
+            <p class="text-sm">Open every day (incl. holidays): <time datetime="06:00-22:00">6:00 AM - 10:00 PM</time></p>
+        </header>
+
+        <nav class="bg-gray-800 text-white p-4 sticky top-0 z-50 shadow">
+            <ul class="flex flex-wrap justify-center gap-4">
+                <li><a href="#class-schedule" class="text-white font-bold hover:underline">Class Schedule</a></li>
+                <li><a href="#member-plans" class="text-white font-bold hover:underline">Member Plans</a></li>
+                <li><a href="exercise1.html" class="text-white font-bold hover:underline">Dashboard - Current Page</a></li>
+            </ul>
+        </nav>
+
+        <main class="p-6 max-w-4xl mx-auto">
+            <section class="bg-white p-6 mb-6 rounded shadow">
+                <h2 class="text-xl font-semibold mb-4">
+                    {{ editingClassId ? 'Edit Class' : 'Add New Class' }}
+                </h2>
+                <form @submit.prevent="handleClassSubmit" id="class-form">
+                    <div class="mb-4">
+                        <label for="class-name" class="block font-bold mb-1">Class Name:</label>
+                        <input v-model="classData.name" type="text" id="class-name" name="name" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="class-time" class="block font-bold mb-1">Time:</label>
+                        <input v-model="classData.time" type="time" id="class-time" name="time" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="class-day" class="block font-bold mb-1">Day of the Week:</label>
+                        <select v-model="classData.day" id="class-day" name="day" required class="w-full p-2 border border-gray-300 rounded">
+                            <option value="" disabled>Select a day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="class-trainer" class="block font-bold mb-1">Trainer:</label>
+                        <input v-model="classData.trainer" type="text" id="class-trainer" name="trainer" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <button type="submit" class="w-full md:w-1/4 bg-purple-200 text-black p-2 rounded border border-gray-300 hover:bg-orange-400">
+                        {{ editingClassId ? 'Save Changes' : 'Add Class' }}
+                    </button>
+                </form>
+            </section>
+
+            <section class="bg-white p-6 mb-6 rounded shadow">
+                <h2 id="class-schedule" class="text-xl font-semibold mb-4">Current Classes</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-800 text-white">
+                                <th class="p-2 border">Name</th>
+                                <th class="p-2 border">Time</th>
+                                <th class="p-2 border">Day</th>
+                                <th class="p-2 border">Trainer</th>
+                                <th class="p-2 border">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="fitnessClass in fitness_classes" :key="fitnessClass.id">
+                                <td class="p-2 border">{{ fitnessClass.name }}</td>
+                                <td class="p-2 border text-center">{{ fitnessClass.time }}</td>
+                                <td class="p-2 border text-center">{{ formatDay(fitnessClass.day) }}</td>
+                                <td class="p-2 border">{{ fitnessClass.trainer }}</td>
+                                <td class="p-2 border space-y-1">
+                                    <button @click="handleClassEdit(fitnessClass)" class="w-full bg-blue-500 text-white p-2 rounded hover:opacity-90">Edit</button>
+                                    <button @click="handleClassDelete(fitnessClass.id)" class="w-full bg-red-600 text-white p-2 rounded hover:opacity-90">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 mb-6 rounded shadow">
+                <h2 id="member-plans" class="text-xl font-semibold mb-4">Member Plans</h2>
+                <form @submit.prevent="handlePlanSubmit" id="plan-form">
+                    <div class="mb-4">
+                        <label for="plan-name" class="block font-bold mb-1">Plan Name:</label>
+                        <input v-model="planData.name" type="text" id="plan-name" name="plan-name" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="plan-duration" class="block font-bold mb-1">Duration (months):</label>
+                        <input v-model="planData.duration" type="number" id="plan-duration" name="plan-duration" min="1" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="plan-price" class="block font-bold mb-1">Price (€):</label>
+                        <input v-model="planData.price" type="number" id="plan-price" name="plan-price" min="0" step="0.01" required class="w-full p-2 border border-gray-300 rounded">
+                    </div>
+                    <button type="submit" class="w-full md:w-1/4 bg-purple-200 text-black p-2 rounded border border-gray-300 hover:bg-orange-400">
+                        {{ editingPlanId ? 'Edit Plan' : 'Add Plan' }}
+                        
+                    </button>
+                </form>
+
+                <div class="overflow-x-auto mt-6">
+                    <table class="w-full border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-800 text-white">
+                                <th class="p-2 border">Plan Name</th>
+                                <th class="p-2 border">Duration (Months)</th>
+                                <th class="p-2 border">Price (€)</th>
+                                <th class="p-2 border">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="plan in membership_plans" :key="plan.id">
+                                <td class="p-2 border">{{ plan.name }}</td>
+                                <td class="p-2 border text-center">{{ plan.duration }}</td>
+                                <td class="p-2 border text-center">€{{ plan.price }}</td>
+                                <td class="p-2 border space-y-1">
+                                    <button @click="handlePlanEdit(plan)" class="w-full bg-blue-500 text-white p-2 rounded hover:opacity-90">Edit</button>
+                                    <button @click="handlePlanDelete(plan.id)" class="w-full bg-red-600 text-white p-2 rounded hover:opacity-90">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 rounded shadow">
+                <h3 class="text-lg font-semibold mb-2">Management Tasks</h3>
+                <details class="mb-2 p-4 border border-gray-300 rounded">
+                    <summary class="font-bold cursor-pointer">Weekly Tasks</summary>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Review class schedule</li>
+                        <li>Check trainer availability</li>
+                    </ul>
+                </details>
+                <details class="mb-2 p-4 border border-gray-300 rounded">
+                    <summary class="font-bold cursor-pointer">Monthly Tasks</summary>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Update trainer availability</li>
+                        <li>Review feedback from members</li>
+                    </ul>
+                </details>
+                <details class="mb-2 p-4 border border-gray-300 rounded">
+                    <summary class="font-bold cursor-pointer">Quarterly Tasks</summary>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Introduce new fitness programs</li>
+                        <li>Analyze class attendance trends</li>
+                    </ul>
+                </details>
+                <details class="mb-2 p-4 border border-gray-300 rounded">
+                    <summary class="font-bold cursor-pointer">Seasonal Tasks</summary>
+                    <ul class="list-disc pl-6 mt-2">
+                        <li>Promote health campaigns</li>
+                        <li>Organize special fitness events</li>
+                    </ul>
+                </details>
+            </section>
+        </main>
+
+        <footer class="bg-gray-800 text-white text-center p-4 mt-6">
+            <p>Fitness Center Management System - Admin Panel</p>
+            <p>&copy; 2025 - Created for studying purposes only</p>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    fitness_classes: [{
+                        id: Date.now() + 1,
+                        name: 'Yoga Basics',
+                        time: '07:00',
+                        day: 'Mon',
+                        trainer: 'Jane Doe'
+                    },
+                    {
+                        id: Date.now() + 2,
+                        name: 'HIIT Workout',
+                        time: '18:00',
+                        day: 'Tue',
+                        trainer: 'John Smith'
+                    }],
+                    classData: {
+                        name: '',
+                        time: '',
+                        day: '',
+                        trainer: ''
+                    },
+                    editingClassId: null,
+                    membership_plans: [{
+                        id: Date.now() - 1,
+                        name: 'Basic Plan',
+                        duration: 1,
+                        price: 30
+                    },{
+                        id: Date.now() - 2,
+                        name: 'Annual Plan',
+                        duration: 12,
+                        price: 300
+                    }],
+                    planData: {
+                        name: '',
+                        duration: 0,
+                        price: 0
+                    },
+                    editingPlanId: null,
+                }
+            },
+            methods: {
+                handleClassSubmit() {
+                    if (this.editingClassId) {
+                        const classIndex = this.fitness_classes.findIndex(classItem => classItem.id === this.editingClassId);
+                        if (classIndex !== -1) {
+                            this.fitness_classes[classIndex] = {
+                                id: this.editingClassId,
+                                ...this.classData
+                            };
+                        }
+                    } else {
+                        const newClass = {
+                            id: Date.now(),
+                            name: this.classData.name,
+                            time: this.classData.time,
+                            day: this.classData.day,
+                            trainer: this.classData.trainer,
+                        };
+
+                        this.fitness_classes.push(newClass);
+
+                        console.log('Updated classes:', this.fitness_classes);
+                    }
+
+                    this.classData = {
+                        name: '',
+                        time: '',
+                        day: '',
+                        trainer: ''
+                    };
+                    this.editingClassId = null;
+                },
+                formatDay(day) {
+                    if (!day) return '';
+                    const map = {
+                        Monday: 'Mon',
+                        Tuesday: 'Tue',
+                        Wednesday: 'Wed',
+                        Thursday: 'Thu',
+                        Friday: 'Fri',
+                        Saturday: 'Sat',
+                        Sunday: 'Sun'
+                    };
+                    return map[day] || day;
+                },
+                handleClassEdit(classItem) {
+                    this.classData = {
+                        name: classItem.name,
+                        time: classItem.time,
+                        day: classItem.day,
+                        trainer: classItem.trainer
+                    };
+                    this.editingClassId = classItem.id;
+                },
+                handleClassDelete(id) {
+                    this.fitness_classes = this.fitness_classes.filter(classItem => classItem.id !== id)
+                },
+                handlePlanSubmit() {
+                    if(this.editingPlanId) {
+                        const planIndex = this.membership_plans.findIndex(plan => plan.id === this.editingPlanId);
+                        if (planIndex !== -1) {
+                            this.membership_plans[planIndex] = {
+                                id: this.editingPlanId,
+                                ...this.planData
+                            }
+                        }
+                    } else {
+                        const newPlan = {
+                            id: Date.now(),
+                            name: this.planData.name,
+                            duration: this.planData.duration,
+                            price: this.planData.price,
+                        };
+
+                        this.membership_plans.push(newPlan);
+
+                        console.log('Updated plans:', this.membership_plans);
+                    };
+
+                    this.planData = {
+                        name: '',
+                        duration: 0,
+                        price: 0
+                    };
+                    this.editingPlanId = null;
+                },
+                handlePlanEdit(planItem) {
+                    this.planData = {
+                        name: planItem.name,
+                        duration: planItem.duration,
+                        price: planItem.price
+                    };
+                    this.editingPlanId = planItem.id;
+                },
+                handlePlanDelete(id) {
+                    this.membership_plans = this.membership_plans.filter(planItem => planItem.id !== id)
+                }
+            },
+            computed: {
+
+            },
+            mounted() {
+
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
